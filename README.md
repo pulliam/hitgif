@@ -1,21 +1,20 @@
 # Wekiwi
-## Description
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus bibendum leo ac est vulputate, nec bibendum dui pulvinar. 
-Vivamus euismod, massa at ullamcorper facilisis, nunc odio ullamcorper sem, vel faucibus massa odio quis augue. 
-Cras tristique, dolor eget rhoncus congue, velit mi consectetur ligula, ut auctor orci metus eu justo. 
-Sed laoreet, arcu consequat gravida fringilla, odio mi dignissim lectus, eget ornare orci nibh eget nibh.
 
 ## User Stories
-- A user should be able to create and edit articles.
-- A user should be able to see all articles that currently exist.
-- All articles should be editable 
-- All articles should display an author (and maybe his contact/email)
-- If an article is updated, the time of that change should be shown.
-- Articles should be written in markdown.
-- Users can add a category to an article.
-- Users can search by category.
+Welcome to Wikiwi.
+We are a plataform where you can delight youself in cool articles written by anyone in the world. 
+Whats cool about it? You can see all versions of the same articles, compare different points of view from the respective authors, and even create your own version, or better! Update an existing version, with your own improvements! 
+To get started, all you need to do is sign up to our page by providing your name, your chosen username and password; Then you are ready to go! You can interact with other users by editing their articles, you can create a new article and select a category for it, and you can search through our huge library of collaborative articles and learn about all sorts of subjects!
+And if you are a design oriented person and enjoy a well written, good looking text, you will love our markdown feature, where you can create articles that will look just as good as a kiwi! 
+For any aditional information, you can loop through this documentation of the elaboration of the app. 
+Welcome to Wekiwi!
+
+## Description
+Wikiwi is an article's sharing application. It's designed to have users that can login, logout, sign up, so when they are logged in (a session is existent), they are able to create new articles, edit existent ones and even delete it. The articles display which author (user) was it's creator, and the articles are separated in categories pre determinated. A time information should be created and stored when a new article is created or edited and associated with it. The users can acces old records of the same article, by clicking in older ones. The users should be able to create new articles in markdown language, and select the category of their article. 
 
 ## ERD
+<img width="1201" alt="screen shot 2015-12-02 at 1 55 20 pm" src="https://cloud.githubusercontent.com/assets/14362520/11545213/f64fc2c2-9913-11e5-99f3-076e220956a6.png">
+<img width="823" alt="screen shot 2015-12-02 at 3 02 56 pm" src="https://cloud.githubusercontent.com/assets/14362520/11545229/1ceb0784-9914-11e5-9ec5-41907fccff34.png">
 <img width="686" alt="screen shot 2015-12-01 at 9 31 27 pm" src="https://cloud.githubusercontent.com/assets/14362520/11521840/89794df2-987e-11e5-9b96-68189d93b87d.png">
 
 ### Active Record Models
