@@ -47,6 +47,9 @@ Sed laoreet, arcu consequat gravida fringilla, odio mi dignissim lectus, eget or
 - Articles belongs to a user
 
 ### Wiki App::ERD
+<img width="686" alt="screen shot 2015-12-01 at 9 31 27 pm" src="https://cloud.githubusercontent.com/assets/14362520/11521840/89794df2-987e-11e5-9b96-68189d93b87d.png">
+
+### Wiki App::DatabaseSchema
 ```
 CREATE TABLE users (
 	id INTEGER PRIMARY KEY,
@@ -78,10 +81,33 @@ CREATE TABLE articles_users (
 
 ```
 
-### Wiki App::DatabaseSchema
-
 ### Wiki App::ActiveRecordClasses
+```
+class User < ActiveRecord::Base
+end
+
+class Category < ActiveRecord::Base
+end
+
+class Article < ActiveRecord::Base
+end
+```
 
 ### Wiki App::ActiveRecordAssociations
+```
+class User < ActiveRecord::Base
+	has_many :articles
+	has_and_belongs_to_many :articles
+end
 
+class Category < ActiveRecord::Base
+	 has_many :articles
+end
+
+class Article < ActiveRecord::Base
+	belongs_to :user
+	belongs_to :category
+	has_and_belongs_to_many :users
+end
+```
 
