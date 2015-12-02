@@ -1,3 +1,7 @@
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS categories;
+DROP TABLE IF EXISTS articles;
+
 CREATE TABLE users (
 	id INTEGER PRIMARY KEY,
 	name VARCHAR,
@@ -8,7 +12,7 @@ CREATE TABLE users (
 
 CREATE TABLE categories (
 	id INTEGER PRIMARY KEY,
-	name VARCHAR,
+	name VARCHAR
 	);
 
 CREATE TABLE articles (
@@ -17,5 +21,5 @@ CREATE TABLE articles (
 	content TEXT,
 	user_id INTEGER,
 	category_id INTEGER,
-	time_created DATETIME, 
+	time_created DATETIME 
 	);
