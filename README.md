@@ -20,7 +20,7 @@ Sed laoreet, arcu consequat gravida fringilla, odio mi dignissim lectus, eget or
 - Articles
 - Date/Time of Creations
 - Categories
-- E-mail/contact of user
+- E-mail/contact of user/username
 - Passwords
 - Forms for receiving informations
 
@@ -29,10 +29,22 @@ Sed laoreet, arcu consequat gravida fringilla, odio mi dignissim lectus, eget or
 - Check if user exists (Sign In) => enter page
 - Log out
 - Create (article)
-- Create Date & Time of Article
--
+- Associate this Article to an user
+- Create & Associate Date & Time of Article
+- Create a Category (or Associate)
+- Show (read) all articles
+- Show (read) all categories
+- Show (read) all users
+- Delete an article 
+- Update an article 
+- Update a Category
 
 ### Wiki App::Associations
+- Users (Unique)
+- Users have Articles
+- Articles have Categories
+- Articles have time/date
+- Articles belongs to a user
 
 ### Wiki App::ERD
 
