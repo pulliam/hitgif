@@ -2,7 +2,7 @@
 
 ## User Stories
 Welcome to Wikiwi.
-We are a plataform where you can delight youself in cool articles written by anyone in the world. 
+We are a platform where you can delight youself in cool articles written by anyone in the world. 
 Whats cool about it? You can see all versions of the same articles, compare different points of view from the respective authors, and even create your own version, or better! Update an existing version, with your own improvements! 
 To get started, all you need to do is sign up to our page by providing your name, your chosen username and password; Then you are ready to go! You can interact with other users by editing their articles, you can create a new article and select a category for it, and you can search through our huge library of collaborative articles and learn about all sorts of subjects!
 And if you are a design oriented person and enjoy a well written, good looking text, you will love our markdown feature, where you can create articles that will look just as good as a kiwi! 
