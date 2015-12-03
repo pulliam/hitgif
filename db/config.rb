@@ -1,5 +1,7 @@
 require 'active_record'
 require 'bcrypt'
+require 'redcarpet'
+require 'redcarpet/compat'
 
 ActiveRecord::Base.establish_connection(
   :adapter => 'sqlite3',

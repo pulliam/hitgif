@@ -4,6 +4,10 @@ module App
     set :method_override, true
     enable :sessions  
 
+      def markdown(article)
+         Redcarpet::Markdown.new(Redcarpet::Render::HTML).render(article)
+      end
+
    	get "/" do
    		erb :index
    	end

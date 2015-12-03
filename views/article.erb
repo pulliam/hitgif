@@ -1,5 +1,6 @@
 <h2><%= @article.name %></h2>
-<p><%= @article.content %></p>
+<%= markdown(@article.content) %>
+
 <p>Created by: <%= User.find_by(id: @article.user_id).name %></p> At: <%= @article.time_created %></p>
 
 <% if @user %>
