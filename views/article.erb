@@ -1,4 +1,4 @@
 <h2><%= @article.name %></h2>
 <p><%= @article.content %></p>
-<p>Created at: <%= @article.time_created %></p>
+<p>Created by: <%= User.find_by(id: @article.user_id).name %></p> At: <%= @article.time_created %></p>
 <input type="button" value="Previous Page" onclick="goBack()">
