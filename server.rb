@@ -14,8 +14,15 @@ module App
 
    	get "/articles" do
    		@articles = Article.all
+         @articles = @articles.sort {|a,b| b[:time_created] <=> a[:time_created]}
    		erb :articles
    	end
+
+      get "/articles/abc" do
+         @articles = Article.all
+         @articles = @articles.sort {|a,b| a[:name] <=> b[:name]}
+         erb :articles
+      end
 
    	get "/categories" do
    		@categories = Category.all
