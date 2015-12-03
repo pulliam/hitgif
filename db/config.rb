@@ -1,4 +1,5 @@
 require 'active_record'
+require 'bcrypt'
 
 ActiveRecord::Base.establish_connection(
   :adapter => 'sqlite3',

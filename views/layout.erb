@@ -3,6 +3,7 @@
 <head>
 	<title>Wekiwi</title>
 </head>
+<link rel="stylesheet" type="text/css" href="../css/style.css">
 <script type="text/javascript" src="../js/main.js"></script>
 <body>
 <a href="/"><p>Home</p></a>
@@ -10,8 +11,21 @@
 
 <%= yield %>
 
-<a href="/login"><p>Login</p></a>
-<a href="/signup"><p>Sign Up</p></a>
+<% if session[:user_id] %>
+<% user = User.find(session[:user_id])%>
+<p>Logged as <%= user.name %> | 
+<a href="/new">Create Article</a> | 
+<a href="/articles/user/<%= session[:user_id] %>">Account</a></p>
 
+<form action="/logout" method="POST">
+  <input type="hidden" name="_method" value="delete">
+  <button>Log Out</button>
+</form>
+
+<% else %>
+<p><a href="/login">Login</a> | <a href="/signup">Sign Up</a></p>
+<% end %>
+
+<button id="back" onclick="goBack()">Previous Page</button>
 </body>
 </html>

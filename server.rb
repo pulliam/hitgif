@@ -5,7 +5,6 @@ module App
     enable :sessions  
 
    	get "/" do
-
    		erb :index
    	end
 
@@ -20,6 +19,7 @@ module App
    	end
 
    	get "/article/:id" do
+         @user = User.find(session[:user_id]) if session[:user_id]
    		@article = Article.find(params[:id])
    		erb :article
    	end
@@ -36,13 +36,18 @@ module App
    	get "/articles/user/:id" do
    		user = User.find(params[:id])
    		@myarticles = user.articles 
-   		erb :myarticles
+   		erb :mypage
    	end
 
-   	post "/starter" do
-   		user = User.find_by(username: params[:username])
-   		session[:user_id] = user.id
-   		redirect to ("/articles/user/#{user.id}")
+   	post "/postlogin" do
+   		@user = User.find_by(username: params[:username]).try(:authenticate, params[:password])
+   		if @user
+            session[:user_id] = @user.id
+            session[:user_name] = @user.name
+      		redirect to ("/articles/user/#{@user.id}")
+         else
+            redirect to "/login"
+         end
    	end
 
    	get "/signup" do
@@ -50,8 +55,10 @@ module App
    	end
 
    	post "/enroll" do
-   		newuser = User.create(name: params["name"], email: params["email"], username: params["username"], password: params["password"])
+   		newuser = User.create(name: params["name"], email: params["email"], username: params["username"], password: params["password"], password_confirmation: params["password_confirmation"])
    		@myarticles = newuser.articles
+         session[:user_id] = newuser.id
+         session[:user_name] = newuser.name
    		redirect to ("/articles/user/#{newuser.id}")
    	end
 
@@ -61,21 +68,26 @@ module App
 
       post "/article" do
          Article.create(name: params["title"], content: params["content"], time_created: DateTime.now, category_id: params["category"], user_id: session[:user_id])
-         erb :articles_new
+         redirect to '/articles'
       end
 
-   	get "/edit" do
+   	get "/edit/:id" do
+         @article = Article.find(params[:id])
    		erb :articles_edit
    	end
 
-      post "/editarticle" do
-         erb :articles_edit
+      post "/edit/:id" do
+         redirect to "/article/#{params[:id]}"
       end
 
-      delete "/article" do
-         erb :articles_edit
+      delete "/article/:id" do
+         Article.find(params[:id]).destroy
+         redirect to '/articles'
       end
 
-
+      delete "/logout" do
+         session[:user_id] = nil
+         redirect to '/' 
+      end
   end
 end

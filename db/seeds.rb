@@ -1,28 +1,28 @@
 require_relative 'config'
 require 'date'
 
-users = [
-	{
-		name: 'Thais Pulliam', 
-		email: 'thais@thais.co', 
-		username: 'pulliam', 
-		password: ''
-	},
-	{
-		name: 'Chris Pulliam', 
-		email: 'chris@appboy.com', 
-		username: 'chris', 
-		password: ''
-	},
-	{
-		name: 'Spotty Puppy', 
-		email: 'dogsdonthave@emails.com', 
-		username: 'spotty', 
-		password: ''
-	}
-]
+# users = [
+# 	{
+# 		name: 'Thais Pulliam', 
+# 		email: 'thais@thais.co', 
+# 		username: 'pulliam', 
+# 		password_digest: ''
+# 	},
+# 	{
+# 		name: 'Chris Pulliam', 
+# 		email: 'chris@appboy.com', 
+# 		username: 'chris', 
+# 		password_digest: ''
+# 	},
+# 	{
+# 		name: 'Spotty Puppy', 
+# 		email: 'dogsdonthave@emails.com', 
+# 		username: 'spotty', 
+# 		password_digest: ''
+# 	}
+# ]
 
-User.create(users)
+# User.create(users)
 
 articles = [
 	{

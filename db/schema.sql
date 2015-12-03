@@ -7,7 +7,7 @@ CREATE TABLE users (
 	name VARCHAR,
 	email TEXT,
 	username VARCHAR(20),
-	password INTEGER
+	password_digest VARCHAR
 	);
 
 CREATE TABLE categories (

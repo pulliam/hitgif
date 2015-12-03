@@ -1,4 +1,15 @@
 <h2><%= @article.name %></h2>
 <p><%= @article.content %></p>
 <p>Created by: <%= User.find_by(id: @article.user_id).name %></p> At: <%= @article.time_created %></p>
-<input type="button" value="Previous Page" onclick="goBack()">
+
+<% if @user %>
+<form action="/article/<%=@article.id%>" method="POST">
+  	<input type="hidden" name="_method" value="delete">
+	<input type="submit" value="Delete"></a>
+</form>
+<a style="display: inline;" href="/edit/<%=@article.id%>"><button>Edit this Article</button></a>
+<br>
+<% else %>
+<p>Log in or sign up to contribute to this article.</p>
+<% end %>
+
