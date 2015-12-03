@@ -3,7 +3,7 @@ module App
 
   class Server < Sinatra::Base
     set :method_override, true
-    enable :sessions
+    enable :sessions  
 
    	get "/" do
 
@@ -31,8 +31,13 @@ module App
    	end
 
    	get "/login" do
-
    		erb :login
+   	end
+
+   	post "/starter" do
+   		user = User.find_by(username: params[:username])
+   		session[:user_id] = user.id
+   		redirect to ('/')
    	end
 
    	get "/signup" do
