@@ -1,4 +1,3 @@
-
 module App
 
   class Server < Sinatra::Base
@@ -34,26 +33,48 @@ module App
    		erb :login
    	end
 
+   	get "/articles/user/:id" do
+   		user = User.find(params[:id])
+   		@myarticles = user.articles 
+   		erb :myarticles
+   	end
+
    	post "/starter" do
    		user = User.find_by(username: params[:username])
    		session[:user_id] = user.id
-   		redirect to ('/')
+   		redirect to ("/articles/user/#{user.id}")
    	end
 
    	get "/signup" do
-
    		erb :sign_up
    	end
 
-   	get "/new" do
+   	post "/enroll" do
+   		newuser = User.create(name: params["name"], email: params["email"], username: params["username"], password: params["password"])
+   		@myarticles = newuser.articles
+   		redirect to ("/articles/user/#{newuser.id}")
+   	end
 
+   	get "/new" do
    		erb :articles_new
    	end
 
-   	get "/edit" do
+      post "/article" do
+         Article.create(name: params["title"], content: params["content"], time_created: DateTime.now, category_id: params["category"], user_id: session[:user_id])
+         erb :articles_new
+      end
 
+   	get "/edit" do
    		erb :articles_edit
    	end
+
+      post "/editarticle" do
+         erb :articles_edit
+      end
+
+      delete "/article" do
+         erb :articles_edit
+      end
 
 
   end

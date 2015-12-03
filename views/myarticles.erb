@@ -1,0 +1,14 @@
+<h1>Welcome to your kiwispace</h1>
+<ul>
+<%if !@myarticles.empty?%>
+	<h1>Your articles:</h1>
+	<% @myarticles.each do |article| %>
+		<li><a href="/article/<%= article.id %>"><%= article.name %></a>, on <%= article.time_created %></li>
+	<% end %>
+</ul>
+	<a href="/new"><button>Create new article</button></a>
+<% else %>
+	<p>You don't have articles yet.</p>
+	<a href="/new"><p>What about creating one?</p></a>
+<% end %>
+<input type="button" value="Previous Page" onclick="goBack()">
