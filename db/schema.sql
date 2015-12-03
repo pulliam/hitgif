@@ -23,3 +23,17 @@ CREATE TABLE articles (
 	category_id INTEGER,
 	time_created DATETIME 
 	);
+
+CREATE TABLE records (
+	id INTEGER PRIMARY KEY,
+	name VARCHAR(200),
+	content TEXT,
+	user_id INTEGER,
+	category_id INTEGER,
+	time_created DATETIME 
+	);
+
+CREATE TABLE articles_records (
+	articles_id INTEGER,
+	records_id INTEGER
+	);

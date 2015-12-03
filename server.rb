@@ -35,6 +35,28 @@ module App
    		erb :article
    	end
 
+      get "/old_entries/:id" do
+         @user = User.find(session[:user_id]) if session[:user_id]
+         @id = params[:id]
+         @list_of_old_ones = Article.find(@id).old_entries
+         @list_of_old_ones = @list_of_old_ones.sort {|a,b| a[:time_created] <=> b[:time_created]}
+         erb :older_ones
+      end
+
+      get "/old_entries/:id/abc" do
+         @user = User.find(session[:user_id]) if session[:user_id]
+         @id = params[:id]
+         @list_of_old_ones = Article.find(@id).old_entries
+         @list_of_old_ones = @list_of_old_ones.sort {|a,b| a[:name] <=> b[:name]}
+         erb :older_ones
+      end
+
+      get "/old_entries/records/:id" do
+         @user = User.find(session[:user_id]) if session[:user_id]
+         @old_entry = Record.find(params[:id])
+         erb :article
+      end
+
    	get "/category/:id" do
    		@articles = Category.find(params[:id]).articles
    		erb :articles_at_category

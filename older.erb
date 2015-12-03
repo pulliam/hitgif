@@ -1,8 +1,7 @@
-<h2><%= @article.name %></h2>
-<%= markdown(@article.content) %>
+<h2><%= @list_of_old_ones.name %></h2>
+<%= markdown(@list_of_old_ones.content) %>
 
-<p>Created by: <%= User.find_by(id: @article.user_id).name %> At: <%= @article.time_created %></p>
-<a href="/old_entries/<%=@article.id%>"><button>See Older Entries</button></a>
+<p>Created by: <%= User.find_by(id: @list_of_old_ones.user_id).name %> At: <%= @list_of_old_ones.time_created %></p>
 
 <% if @user %>
 <form action="/article/<%=@article.id%>" method="POST">
