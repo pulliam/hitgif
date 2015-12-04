@@ -1,3 +1,6 @@
+require './app'
+run Sinatra::Application
+
 require 'sinatra'
 
 require_relative 'db/config'

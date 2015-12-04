@@ -1,6 +1,4 @@
-require 'pry'
 require 'sinatra'
-require 'byebug'
 
 module App
   class Server < Sinatra::Base
