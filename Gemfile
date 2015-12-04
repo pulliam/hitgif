@@ -1,13 +1,12 @@
 # A sample Gemfile
 source "https://rubygems.org"
+ruby '2.0.0'
 
 # gem "rails"
 gem 'sinatra'
 gem 'activerecord'
-gem 'pry'
 gem 'bcrypt'
 gem 'redcarpet'
-gem 'sinatra-activerecord'
 
 group :development do  
  	gem 'sqlite3' 
