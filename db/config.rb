@@ -2,7 +2,6 @@ require 'active_record'
 require 'bcrypt'
 require 'redcarpet'
 require 'redcarpet/compat'
-require 'byebug'
 
 if ENV['RACK_ENV'] == "production"
   require 'uri'
