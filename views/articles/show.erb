@@ -1,0 +1,40 @@
+<!--Title of Article-->
+<div class="articles-header">
+	<h2><%= @article.name %></h2>
+</div>
+<!--/Title of Article-->
+
+<!--Content of Article In Markdown-->
+<div class="articles-body">
+	<%= markdown(@record.content) %>
+	<p>Created by: <%= @article.user.name %> At: <%= @article.time_created %> 
+	Last updated by: <%= @record.user.name %> At: <%= @record.time_created %></p>
+</div>
+<!--/Content of Article In Markdown-->
+
+<!-- Delete or Edit Article -->
+<div class="articles-footer">
+	<!-- see previous versions -->
+	<a href="/articles/<%=@article.id%>/record">See all versions</a>
+	<!-- if user is logged: -->
+	<% if session[:user_id] %> 
+		<!-- delete option only if same user logged created it-->
+		<% if @article.user == User.find(session[:user_id]) %>
+			<form action="/article/<%=@article.id%>" method="POST">
+	  			<input type="hidden" name="_method" value="delete">
+				<input type="submit" value="Delete">
+			</form>
+		<% end %>
+		<!-- if user is logged, give an option to edit article -->
+		<a href="/articles/update/<%=@article.id%>">Edit this Article</a>
+	<!-- If no user is signed in, display message -->
+	<% else %>
+		<p>Log in or sign up to contribute to this article.</p>
+	<% end %>
+</div>
+<!--/Delete or Edit Article -->
+
+
+<!-- Always Display: -->
+<button id="back" onclick="goBack()">Previous Page</button>
+<!-- /Always Display -->

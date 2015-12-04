@@ -1,0 +1,28 @@
+<!-- Title of Page -->
+<div class="articles-header">
+  <h2>What's your version of this article?</h2>
+</div>
+<!--/Title of Page -->
+
+<!-- Body of Page -->
+<div class="articles-body">
+  <form action="/articles/<%=@article.id%>" method="POST">
+
+    <input type="hidden" name="_method" value="patch">
+
+    <input type="text" name="title" value="<%=@article.name%>">
+    <p>Select New Category:<p><br> 
+    <input type="radio" name="category" value="1" checked>Education
+    <input type="radio" name="category" value="2" checked>Sports
+    <input type="radio" name="category" value="3" checked>Lifestyle
+    <input type="radio" name="category" value="4" checked>Animals
+    <input type="radio" name="category" value="5" checked>Tv
+    <input type="radio" name="category" value="6" checked>Travel
+    <br>
+    <br>
+    <label for="article-content">Edit/Redo</label><br>
+    <textarea id="article-content" name="content" rows="20" cols="50"><%=@article.content%></textarea><br>
+    <button>Update</button>
+  </form>
+</div>
+<!--/Body of Page -->

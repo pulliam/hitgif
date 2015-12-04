@@ -1,0 +1,34 @@
+<!-- Title of Page -->
+<div class="articles-header">
+	<h2>Select Article</h2>
+</div>
+<!--/Title of Page-->
+
+<!-- Options Menu -->
+<div class="articles-options">
+	<form action="/articles/ordered/time_created" method="GET">
+		<!-- Sort by Recent -->
+		<button type="submit">Most Recent</button>
+	</form>
+	<form action="/articles/ordered/name" method="GET">
+		<!-- Sort by Name -->
+		<button type="submit">By Name</button>
+	</form>
+	<!-- Sort by Category (by Showing Categories/Index) -->
+	<a href="/categories"><button>By Category</button></a>
+</div>
+<!--/Options Menu-->
+
+<!-- List of Articles -->
+<div class="articles-body">
+	<ul>
+		<% @articles.each do |article| %>
+			<li><a href="/articles/<%= article.id %>"><%= article.name %></a></li>
+		<% end %>
+	</ul>
+</div>
+<!--/List of Articles -->
+
+<!-- Always Display: -->
+<button id="back" onclick="goBack()">Previous Page</button>
+<!-- /Always Display -->

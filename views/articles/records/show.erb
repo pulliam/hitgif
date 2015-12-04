@@ -1,0 +1,13 @@
+<!--Title of Article-->
+<div class="articles-header">
+	<h2><%= @record.name %></h2>
+</div>
+<!--/Title of Article-->
+
+<!--Content of Article In Markdown-->
+<div class="articles-body">
+<%= markdown(@record.content) %>
+	<p>Created by: <%= @article.user.name %> At: <%= @article.time_created %> 
+	Last updated by: <%= @record.user.name %> At: <%= @record.time_created %></p>
+</div>
+<!--/Content of Article In Markdown-->

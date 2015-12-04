@@ -1,0 +1,17 @@
+<!-- Title of Page -->
+<div class="categories-header">
+	<h2>Select a category</h2>
+</div>
+<!--/Title of Page-->
+
+<!-- Body of Page -->
+<div class="categories-body">
+	<ul>
+		<% @articles.each do |article| %>
+			<li><a href="/articles/<%= article.id %>"><%= article.name %></a></li>
+		<% end %>
+	</ul>
+</div>
+<!--/Body of Page-->
+
+

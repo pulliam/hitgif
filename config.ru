@@ -1,7 +1,6 @@
-require "pry"
-require "sinatra"
+require 'sinatra'
 
-require_relative "db/config"
-require_relative "server"
+require_relative 'db/config'
+require_relative 'server'
 
 run App::Server

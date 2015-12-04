@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS categories;
 DROP TABLE IF EXISTS articles;
+DROP TABLE IF EXISTS records;
 
 CREATE TABLE users (
 	id INTEGER PRIMARY KEY,
@@ -17,7 +18,7 @@ CREATE TABLE categories (
 
 CREATE TABLE articles (
 	id INTEGER PRIMARY KEY,
-	name VARCHAR(200),
+	name VARCHAR,
 	content TEXT,
 	user_id INTEGER,
 	category_id INTEGER,
@@ -26,14 +27,10 @@ CREATE TABLE articles (
 
 CREATE TABLE records (
 	id INTEGER PRIMARY KEY,
-	name VARCHAR(200),
+	name VARCHAR,
 	content TEXT,
 	user_id INTEGER,
 	category_id INTEGER,
-	time_created DATETIME 
-	);
-
-CREATE TABLE articles_records (
-	articles_id INTEGER,
-	records_id INTEGER
+	time_created DATETIME,
+	article_id INTEGER
 	);

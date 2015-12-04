@@ -1,0 +1,19 @@
+<!-- Title of Page -->
+<div class="articles-header">
+	<h2><%= @article.name %>'s History</h2>
+</div>
+<!--/Title of Page -->
+
+<!-- Body of Page -->
+<div class="articles-body">
+	<ul>
+		<% @records.each do |record| %>
+			<li><a href="/articles/<%= @article.id %>/records/<%= record.id %>"><%= record.name %></a></li>
+		<% end %>
+	</ul>
+</div>
+<!--/Body of Page -->
+
+<!-- Always Display: -->
+<button id="back" onclick="goBack()">Previous Page</button>
+<!-- /Always Display -->

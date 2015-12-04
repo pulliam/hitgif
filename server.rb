@@ -1,126 +1,127 @@
+require 'pry'
+require 'sinatra'
+require 'byebug'
+
 module App
-
   class Server < Sinatra::Base
-    set :method_override, true
-    enable :sessions  
+    set :method_overide, true 
+	enable :sessions # Enable sessions creation for logins
 
-      def markdown(article)
-         Redcarpet::Markdown.new(Redcarpet::Render::HTML).render(article)
-      end
+	def markdown(text) # Define method markdown with redcarpet gem
+		Redcarpet::Markdown.new(Redcarpet::Render::HTML).render(text)
+	end
 
-   	get "/" do
-   		erb :index
-   	end
+	get "/" do # Request main page
+		# Define if user is logged and which user
+		erb :'main/index'
+	end
 
-   	get "/articles" do
-   		@articles = Article.all
-         @articles = @articles.sort {|a,b| b[:time_created] <=> a[:time_created]}
-   		erb :articles
-   	end
+	get "/articles" do # Request list of all articles
+		@articles = Article.all.order(name: :asc)
+		erb :'articles/index'
+	end
 
-      get "/articles/abc" do
-         @articles = Article.all
-         @articles = @articles.sort {|a,b| a[:name] <=> b[:name]}
-         erb :articles
-      end
+	get "/articles/ordered/:order" do # Request all articles by order
+		articles = Article.all
+		@articles = articles.order(params[:order] => :desc) unless params[:order] == "name"
+		@articles = articles.order(params[:order] => :asc) if params[:order] == "name"
+		erb :'articles/index'
+	end
 
-   	get "/categories" do
-   		@categories = Category.all
-   		erb :categories
-   	end
+	get "/articles/:id" do # Request specific article
+		@article = Article.find(params[:id])
+		@record = @article.records.last
+		erb :'articles/show'
+	end
 
-   	get "/article/:id" do
-         @user = User.find(session[:user_id]) if session[:user_id]
-   		@article = Article.find(params[:id])
-   		erb :article
-   	end
+	get "/articles/:id/record" do # Request all records of an article
+		@article = Article.find(params[:id])
+		@records = @article.records.order(time_created: :desc)
+		erb :'articles/records/index'
+	end
 
-      get "/old_entries/:id" do
-         @user = User.find(session[:user_id]) if session[:user_id]
-         @id = params[:id]
-         @list_of_old_ones = Article.find(@id).old_entries
-         @list_of_old_ones = @list_of_old_ones.sort {|a,b| a[:time_created] <=> b[:time_created]}
-         erb :older_ones
-      end
+	get "/articles/:id/records/:id_record" do # Request specific record of an article
+		@record = Record.find(params[:id_record])
+		@article = Article.find(params[:id])
+		erb :'articles/records/show'
+	end
 
-      get "/old_entries/:id/abc" do
-         @user = User.find(session[:user_id]) if session[:user_id]
-         @id = params[:id]
-         @list_of_old_ones = Article.find(@id).old_entries
-         @list_of_old_ones = @list_of_old_ones.sort {|a,b| a[:name] <=> b[:name]}
-         erb :older_ones
-      end
+	get "/article/create" do # Request form to create new article
+		erb :'articles/create/article'
+	end
 
-      get "/old_entries/records/:id" do
-         @user = User.find(session[:user_id]) if session[:user_id]
-         @old_entry = Record.find(params[:id])
-         erb :article
-      end
+	post "/articles" do # Creates new article
+		@new_article = Article.create({ name: params["title"], content: params["content"], time_created: DateTime.now, category_id: params["category"], user_id: session[:user_id] })
+		Record.create({ name: params["title"], content: params["content"], time_created: DateTime.now, category_id: params["category"], user_id: session[:user_id], article_id: @new_article.id })
+		redirect to "/articles"
+	end
 
-   	get "/category/:id" do
-   		@articles = Category.find(params[:id]).articles
-   		erb :articles_at_category
-   	end
+	get "/articles/update/:id" do # Request form to update an article
+		@article = Article.find(params[:id].to_i)
+		erb :'articles/update/article'
+	end
 
-   	get "/login" do
-   		erb :login
-   	end
+	patch "/articles/:id" do # Updates a specific article
+		article = Article.find(params["id"])
+		@record = Record.create( {name: params["name"], content: params["content"], time_created: DateTime.now, category_id: params["category"], user_id: session[:user_id], article_id: article.id } )
+		binding.pry
+		redirect to "/articles/#{article.id}"
+	end
 
-   	get "/articles/user/:id" do
-   		user = User.find(params[:id])
-   		@myarticles = user.articles 
-   		erb :mypage
-   	end
+	delete "/article/:id" do # Deletes an article only if creator of the same is the logged user
+		article = Article.find(params[:id])
+		article.destroy if article.user == $user
+		redirect to "/articles"
+	end
 
-   	post "/postlogin" do
-   		@user = User.find_by(username: params[:username]).try(:authenticate, params[:password])
-   		if @user
-            session[:user_id] = @user.id
-            session[:user_name] = @user.name
-      		redirect to ("/articles/user/#{@user.id}")
-         else
-            redirect to "/login"
-         end
-   	end
+	get "/categories" do # Request a list of all categories
+		@categories = Category.all
+		erb :'categories/index'
+	end
 
-   	get "/signup" do
-   		erb :sign_up
-   	end
+	get "/categories/articles/:id" do # Request a specific article inside a category
+		category = Category.find(params[:id])
+		@articles = category.articles
+		erb :'categories/show'
+	end
 
-   	post "/enroll" do
-   		newuser = User.create(name: params["name"], email: params["email"], username: params["username"], password: params["password"], password_confirmation: params["password_confirmation"])
-   		@myarticles = newuser.articles
-         session[:user_id] = newuser.id
-         session[:user_name] = newuser.name
-   		redirect to ("/articles/user/#{newuser.id}")
-   	end
+	get "/login" do # Request user information for login
+		@message = params[:message]
+		erb :'sessions/login'
+	end
 
-   	get "/new" do
-   		erb :articles_new
-   	end
+	post "/sessions" do # Log in a user or display error message
+		user = User.find_by(username: params[:username]).try(:authenticate, params[:password])
+		if user # Authenticates user password
+			session[:user_id] = user.id # Start session
+			session[:user_name] = user.name
+			redirect to "/login?message=Log%20In%20Successful"
+		else
+			redirect to "/login?message=Wrong%20Password%20Please%20Try%20Again."
+		end
+	end
 
-      post "/article" do
-         Article.create(name: params["title"], content: params["content"], time_created: DateTime.now, category_id: params["category"], user_id: session[:user_id])
-         redirect to '/articles'
-      end
+	delete "/sessions" do # Deletes a session, logging out the user
+		session[:user_id] = nil
+		redirect to "/"
+	end
 
-   	get "/edit/:id" do
-         @article = Article.find(params[:id])
-   		erb :articles_edit
-   	end
+	get "/users/articles/:id" do # Request page of logged user, with articles created by the same
+		user = User.find(params[:id])
+		@user_articles = user.articles
+		erb :'sessions/user'
+	end
 
-      post "/edit/:id" do
-         redirect to "/article/#{params[:id]}"
-      end
+	get "/register" do # Request form to register new user
+		erb :'sessions/signup'
+	end
 
-      delete "/article/:id" do
-         Article.find(params[:id]).destroy
-         redirect to '/articles'
-      end
-
-      delete "/logout" do
-         session[:user_id] = nil
-         redirect to '/' 
-      end
+	post "/users" do # Registers new user
+		new_user = User.create( {name: params["name"], email: params["email"], username: params["username"], password: params["password"], password_confirmation: params["password_confirmation"]} )
+		session[:user_id] = new_user.id #Logs in the new user
+		session[:user_name] = new_user.name
+		@user_articles = new_user.articles
+		redirect to "/users/articles/#{new_user.id}" #Redirects to User Page
+	end
   end
 end
