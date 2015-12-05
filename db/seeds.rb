@@ -7,13 +7,13 @@ users = [
 	  	    email: "thais@thais.co",
 	        username: "thais",
 	        password: "11"
-	      },
+	        },
 	      {
 	        name: "Chris Pulliam",
 	        email: "chris@appboy.com",
 	        username: "chris",
 	        password: "22"
-	      },
+	        },
 	      {
 	        name: "Spotty Puppy",
 	        email: "dogsdonthave@emails.com",
@@ -31,14 +31,14 @@ articles = [
 	           user_id: 2,
 	           category_id: 2,
 	           time_created: DateTime.now
-             },
+               },
              {
 	           name: 'Arachnophobia',
 	           content: 'First: People (or DOGS?) with arachnophobia tend to feel uneasy in any area they believe could harbor spiders or that has visible signs of their presence, such as webs. If arachnophobics see a spider, they may not enter the general vicinity until they have overcome the panic attack that is often associated with their phobia. Some people scream, cry, jump from moving cars, experience trouble breathing, sweating or even heart palpitations when they come in contact with an area near spiders or their webs. In some extreme cases, even a picture or a realistic drawing of a spider can also trigger fear.',
 	           user_id: 3,
 	           category_id: 4,
 	           time_created: DateTime.now
-             },
+               },
              {
 	           name: 'How to learn SQL?',
 	           content: 'First: SQL (pronounced ess-que-el) stands for Structured Query Language. SQL is used to communicate with a database. According to ANSI (American National Standards Institute), it is the standard language for relational database management systems. SQL statements are used to perform tasks such as update data on a database, or retrieve data from a database. Some common relational database management systems that use SQL are: Oracle, Sybase, Microsoft SQL Server, Access, Ingres, etc. Although most database systems use SQL, most of them also have their own additional proprietary extensions that are usually only used on their system. However, the standard SQL commands such as "Select", "Insert", "Update", "Delete", "Create", and "Drop" can be used to accomplish almost everything that one needs to do with a database. This tutorial will provide you with the instruction on the basics of each of these commands as well as allow you to put them to practice using the SQL Interpreter.',
@@ -58,7 +58,7 @@ records = [
 	           category_id: 2,
 	           time_created: DateTime.now,
 	           article_id: 1
-             },
+               },
              {
 	           name: 'Arachnophobia',
 	           content: 'People (or DOGS?) with arachnophobia tend to feel uneasy in any area they believe could harbor spiders or that has visible signs of their presence, such as webs. If arachnophobics see a spider, they may not enter the general vicinity until they have overcome the panic attack that is often associated with their phobia. Some people scream, cry, jump from moving cars, experience trouble breathing, sweating or even heart palpitations when they come in contact with an area near spiders or their webs. In some extreme cases, even a picture or a realistic drawing of a spider can also trigger fear.',
@@ -66,15 +66,15 @@ records = [
 	           category_id: 4,
 	           time_created: DateTime.now,
 	           article_id: 2
-             },
+               },
              {
 	           name: 'How to learn SQL?',
 	           content: 'SQL (pronounced ess-que-el) stands for Structured Query Language. SQL is used to communicate with a database. According to ANSI (American National Standards Institute), it is the standard language for relational database management systems. SQL statements are used to perform tasks such as update data on a database, or retrieve data from a database. Some common relational database management systems that use SQL are: Oracle, Sybase, Microsoft SQL Server, Access, Ingres, etc. Although most database systems use SQL, most of them also have their own additional proprietary extensions that are usually only used on their system. However, the standard SQL commands such as "Select", "Insert", "Update", "Delete", "Create", and "Drop" can be used to accomplish almost everything that one needs to do with a database. This tutorial will provide you with the instruction on the basics of each of these commands as well as allow you to put them to practice using the SQL Interpreter.',
 	           user_id: 1,
 	           category_id: 1,
 	           time_created: DateTime.now,
-	           article_id: 3
-             }
+	           article_id: 3 
+	       	   }
 ]
 
 Record.create(records)
@@ -89,3 +89,23 @@ categories = [
 ]
 
 Category.create(categories)
+
+visits = [
+  {
+  	visitor_id: 1, 
+  	visited_id: 2, 
+  	created_at: DateTime.new(2015,12,01,8,37)
+  	},
+  {
+  	visitor_id: 1, 
+  	visited_id: 2, 
+  	created_at: DateTime.new(2015,12,01,8,50)
+  	},
+  {
+  	visitor_id: 1, 
+  	visited_id: 2, 
+  	created_at: DateTime.new(2015,12,01,9,02)
+  	},
+]
+
+Visit.create(visits)

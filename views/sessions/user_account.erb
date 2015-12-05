@@ -1,0 +1,29 @@
+<!-- Title of Page -->
+	<div class="user-title">
+		<h2><%=session[:user_name]%> Kiwi's</h2>
+		<% if @visits %>
+  			<p><% @visits.length %> people have visited your articles recently.<a href="/users/visits">See Who</a></p>
+    	<% end %>
+		<p><a href="/users">Search Friends</a></p>
+	</div>
+<!--/Title of Page -->
+
+<!-- Body of Page -->
+	<div class="user-body">
+		<%if @user_articles.any? %>
+		<!-- If User has Articles -->
+			<h3>Articles by me:</h3>
+			<ul> 
+				<!-- Articles of User -->
+				<% @user_articles.each do |article| %>
+					<li><a href="/articles/<%= article.id %>"><%= article.name %></a>, on <%= article.time_created %></li>
+				<% end %>
+				<!--/Articles of User -->
+			</ul>
+		<% else %>
+		<!-- If User Doesn't Have Articles -->
+			<p>You don't have articles yet. 
+			<a href="/article/create">What about creating one?</a></p>
+		<% end %>
+	</div>
+<!--/Body of Page -->

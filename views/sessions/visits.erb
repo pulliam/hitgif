@@ -1,0 +1,21 @@
+<!-- Title of Page -->
+<div class="user-title">
+	<h2><%=session[:user_name]%> Vistors</h2>
+	<p><a href="/users">See All Users</a></p>
+</div>
+<!--/Title of Page -->
+
+<!-- Body of Page -->
+<div class="user-body">
+	<% if @visits %>
+		<ul>  
+			<% @visits.each do |visit| %>
+			<li><%= visit.visitor.name %>, 
+			visited at <%= visit.created_at %></li>
+			<% end %>
+		</ul>
+	<% else %>
+		<p>No one has visited you recently. <br>Create new<a href="/article/create">articles and increase your views!</a></p>
+	<% end %>
+</div>
+<!--/Body of Page -->

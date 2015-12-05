@@ -4,6 +4,12 @@
 	</div>
 <!--/Title of Page -->
 
+<!-- Signup Unsuccessful -->
+<% if params[:message] && !session[:user_id] %>
+	<%= @message %>
+<% end %>
+<!-- Signup Unsuccessful -->
+
 <!-- Body of Page -->
 	<div class="sessions-body">
 		<form action="/users" method="POST">

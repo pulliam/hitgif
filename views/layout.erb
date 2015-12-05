@@ -3,16 +3,19 @@
 <head>
 	<title>WEWIKI</title>
 	<!-- Links to Public -->
-	<link rel="stylesheet" type="text/css" href="../css/style.css">
-	<script type="text/javascript" src="../js/main.js"></script>
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/reset.css">
+	<link href='https://fonts.googleapis.com/css?family=Gloria+Hallelujah' rel='stylesheet' type='text/css'>
+	<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+	<script src="/js/main.js"></script>
 	<!-- /Links to Public -->
 </head>
 
 <body>
 	<!-- Header -->
-	<div class="header">
+	<div class="main_header">
 		<!-- Home Button -->
-		<a href="/"><p>Home</p></a>
+		<a href="/"><p class="home_button">Home</p></a>
 		<!-- Brand Name -->
 		<h1>WEKIWI</h1>
 	</div>
@@ -27,24 +30,27 @@
 	<!-- /Body -->	
 
 	<!-- Footer -->
-	<div class="footer">
+	<div class="main_footer">
 		<!-- OPTION1: If User is Logged, Show: -->
 		<% if session[:user_id] %>
 			<% user = User.find(session[:user_id])%>
 			<!-- Logged as, create article, my account -->
-			<p>Logged as <%= user.name %> | <a href="/article/create">Create Article</a> | <a href="/users/articles/<%= session[:user_id] %>">Account</a></p>
+			<p>Logged as <%= user.name %> | <a href="/article/create">Create Article</a> | <a href="/users/articles/<%= session[:user_id] %>">My Account</a></p>
 			<!--/Logged as, create article, my account -->
-			<form action="/sessions" method="POST">
-  				<input type="hidden" name="_method" value="delete">
+			<form action="/sessions/delete" method="POST">
   				<button>Log Out</button>
 			</form>
 		<!-- OPTION2: If User NOT Logged, Show: -->
 		<% else %>
-			<p><a href="/login">Login</a> | <a href="/register">Sign Up</a></p>
+			<p class="menu-log-in"><a href="/login">Login</a> | <a href="/register">Sign Up</a></p>
 		<% end %>
 		<!--/OPTIONS -->
+		<!-- Always Display: -->
+		<button class="previous_page">Previous Page</button>
+		<!-- /Always Display -->
 	</div>
 	<!-- /Footer -->
+
 
 </body>
 </html>

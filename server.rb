@@ -1,21 +1,29 @@
 require 'sinatra'
+require 'better_errors'
+require 'pry'
 
 module App
   class Server < Sinatra::Base
     set :method_overide, true 
 	enable :sessions # Enable sessions creation for logins
 
+	require "better_errors"
+    	configure :development do
+      	use BetterErrors::Middleware
+      	BetterErrors.application_root = __dir__
+    end
+
 	def markdown(text) # Define method markdown with redcarpet gem
 		Redcarpet::Markdown.new(Redcarpet::Render::HTML).render(text)
 	end
 
 	get "/" do # Request main page
-		# Define if user is logged and which user
+		@message = params[:message]
 		erb :'main/index'
 	end
 
 	get "/articles" do # Request list of all articles
-		@articles = Article.all.order(name: :asc)
+		@articles = Article.all
 		erb :'articles/index'
 	end
 
@@ -28,7 +36,6 @@ module App
 
 	get "/articles/:id" do # Request specific article
 		@article = Article.find(params[:id])
-		@record = @article.records.last
 		erb :'articles/show'
 	end
 
@@ -59,14 +66,14 @@ module App
 		erb :'articles/update/article'
 	end
 
-	patch "/articles/:id" do # Updates a specific article
+	post "/article/update/:id" do # Updates a specific article
 		article = Article.find(params["id"])
-		@record = Record.create( {name: params["name"], content: params["content"], time_created: DateTime.now, category_id: params["category"], user_id: session[:user_id], article_id: article.id } )
-		binding.pry
+		article.update({ name: params["name"], content: params["content"], time_created: DateTime.now, category_id: params["category"], user_id: session[:user_id] })
+		record = Record.create({ name: params["name"], content: params["content"], time_created: DateTime.now, category_id: params["category"], user_id: session[:user_id], article_id: article.id } )
 		redirect to "/articles/#{article.id}"
 	end
 
-	delete "/article/:id" do # Deletes an article only if creator of the same is the logged user
+	post "/article/delete/:id" do # Deletes an article only if creator of the same is the logged user
 		article = Article.find(params[:id])
 		article.destroy if article.user == $user
 		redirect to "/articles"
@@ -93,13 +100,13 @@ module App
 		if user # Authenticates user password
 			session[:user_id] = user.id # Start session
 			session[:user_name] = user.name
-			redirect to "/login?message=Log%20In%20Successful"
+			redirect to "/?message=Log%20In%20Successful"
 		else
 			redirect to "/login?message=Wrong%20Password%20Please%20Try%20Again."
 		end
 	end
 
-	delete "/sessions" do # Deletes a session, logging out the user
+	post "/sessions/delete" do # Deletes a session, logging out the user
 		session[:user_id] = nil
 		redirect to "/"
 	end
@@ -107,19 +114,41 @@ module App
 	get "/users/articles/:id" do # Request page of logged user, with articles created by the same
 		user = User.find(params[:id])
 		@user_articles = user.articles
+		erb :'sessions/user_account'
+	end
+
+	get "/users" do # Request page of all registered users.
+		@users = User.all
+		erb :'sessions/users'
+	end
+
+	get "/users/:id" do # Request page of all registered users.
+		redirect to "/" if !session[:user_id]
+      	Visit.create({ visited_id: params[:id], visitor_id: session[:user_id], created_at: DateTime.now})
+      	@user = User.find(params[:id])
 		erb :'sessions/user'
 	end
 
+	get "/users/visits" do # Request page of all registered users.
+		@visits = User.find(session[:user_id]).visits
+		@users = User.all
+		erb :'sessions/visits'
+	end
+
 	get "/register" do # Request form to register new user
+		@message = params[:message]
 		erb :'sessions/signup'
 	end
 
 	post "/users" do # Registers new user
+		if params["password"] == params["password_confirmation"] && !params["password"].empty?
 		new_user = User.create( {name: params["name"], email: params["email"], username: params["username"], password: params["password"], password_confirmation: params["password_confirmation"]} )
 		session[:user_id] = new_user.id #Logs in the new user
 		session[:user_name] = new_user.name
-		@user_articles = new_user.articles
-		redirect to "/users/articles/#{new_user.id}" #Redirects to User Page
+		redirect to "/?message=Registered%20Successfully!%20Welcome!" #Redirects to User Page
+		else 
+		redirect to "/register?message=Wrong%20Password%20Confirmation" 
+		end
 	end
   end
 end
