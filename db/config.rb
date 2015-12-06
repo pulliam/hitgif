@@ -4,7 +4,7 @@ require 'redcarpet'
 require 'redcarpet/compat'
 require 'json'
 
-BetterErrors::Middleware.allow_ip! ENV['TRUSTED_IP'] if ENV['TRUSTED_IP']
+# BetterErrors::Middleware.allow_ip! ENV['TRUSTED_IP'] if ENV['TRUSTED_IP']
 
 if ENV['RACK_ENV'] == "production"
   require 'uri'
