@@ -2,7 +2,6 @@ require 'active_record'
 require 'bcrypt'
 require 'redcarpet'
 require 'redcarpet/compat'
-require 'better_errors'
 require 'json'
 
 BetterErrors::Middleware.allow_ip! ENV['TRUSTED_IP'] if ENV['TRUSTED_IP']
