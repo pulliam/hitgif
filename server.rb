@@ -5,12 +5,6 @@ module App
     set :method_overide, true 
 	enable :sessions # Enable sessions creation for logins
 
-	require "better_errors"
-    	configure :development do
-      	use BetterErrors::Middleware
-      	BetterErrors.application_root = __dir__
-    end
-
 	def markdown(text) # Define method markdown with redcarpet gem
 		Redcarpet::Markdown.new(Redcarpet::Render::HTML).render(text)
 	end
