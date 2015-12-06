@@ -7,6 +7,7 @@ gem 'sinatra'
 gem 'activerecord'
 gem 'bcrypt'
 gem 'redcarpet'
+gem 'json'
 
 group :development do  
  	gem 'sqlite3' 

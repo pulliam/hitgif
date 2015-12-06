@@ -6,6 +6,9 @@
 
 <!-- Body of Page -->
 <div class="articles-body">
+    <% if @article_gif %> 
+        <img style="max-width:150px;"src="<%= @article_gif %>" style="max"><br><br>
+    <% end %> 
     <form action="/article/update/<%=@article.id%>" method="POST">
         <textarea name="name" rows="1" cols="70"><%=@article.name%></textarea>
         <p>Select New Category:<p><br> 

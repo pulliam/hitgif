@@ -4,9 +4,60 @@
 <% end %>
 <!--/Login Successful-->
 
-<div class="navegation">
+<h1>Welcome</h1>
+<br>
+<!-- href="/article/create?gif=https://media.giphy.com/media/Y376OHpjmYBiM/giphy.gif"
+src="https://media.giphy.com/media/Y376OHpjmYBiM/giphy.gif" -->
 
-	<img src="https://ikfashion.com.au/media/magentothem/avatar/CuteDogIRescuedAHumanpawsitivelytexasjpg">
+<% if session[:user_id] %>
+	<p>Click to Create an Article on this GIF</p>
+	<button id="reload">Or Randomize Gif</button><br>
+	<a id="link-this">
+	<img id="gif-this" style="max-width:400px;"></a>
+	<script>
+		function setup() {
+			noCanvas();
+		  	var url = api + apiKey + query;
+		  	loadJSON(url, function(giphy) {
+		  		imgTag = document.getElementById("gif-this");
+				linkTag = document.getElementById("link-this");
+				imgTag.setAttribute('src', ''+ lala + '');
+				linkTag.setAttribute('href', '/article/create?gif='+ lala + '');
+		    	lala = giphy["data"]["image_original_url"];
+		    })
+		};
+		document.getElementById("reload").addEventListener('click', 
+			function(){
+		  		var url = api + apiKey + query;
+		  		loadJSON(url, function(giphy) {
+		  			randomIndex = Math.floor(Math.random() * arrayOfTags.length);
+					query = arrayOfTags[randomIndex];
+		  			imgTag = document.getElementById("gif-this");
+					linkTag = document.getElementById("link-this");
+					imgTag.setAttribute('src', ''+ lala + '');
+					linkTag.setAttribute('href', '/article/create?gif='+ lala + '');
+		    		lala = giphy["data"]["image_original_url"];
+		 	    	});
+			})
+	</script>
+<% else %>
+	<h2><a href="/login">Login</a> or <a href="/register">Sign up</a> to get started...</h2>
+	<img id="gif-this" style="max-width:400px;">
+		<script>
+		function setup() {
+			noCanvas();
+		  	var url = api + apiKey + query;
+		  	loadJSON(url, function(giphy) {
+		  		imgTag = document.getElementById("gif-this");
+				imgTag.setAttribute('src', ''+ lala + '');
+		    	lala = giphy["data"]["image_original_url"];
+		    })
+		};
+	</script>
+	<h2>This is just an example of what you can create an article on!</h2>
+<% end %>
 
-	<a href="/articles"><p>All Articles</a> | <a href="/categories">Categories</a>
-</div>
+
+
+
+

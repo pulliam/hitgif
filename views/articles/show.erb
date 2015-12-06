@@ -1,5 +1,8 @@
 <!--Title of Article-->
 <div class="articles-header">
+	<% if @article.gif != "empty" %>
+	<img src="<%= @article.gif %>">
+	<% end %>
 	<h2><%= @article.name %></h2>
 </div>
 <!--/Title of Article-->
@@ -8,27 +11,28 @@
 <div class="one-article-div">
 	<%= markdown(@article.content) %>
 	<br>
-	<p>Last Updated by: <%= @article.user.name %> At: <%= @article.time_created %></p><br>
+	<p>Last Updated by: <%= @article.user.name %>, <%= @article.time_created.strftime("On %m/%d/%Y At %I:%M%p") %></p><br>
 </div>
 <!--/Content of Article In Markdown-->
 
 <!-- Delete or Edit Article -->
 <div class="articles-footer">
 	<!-- see previous versions -->
-	<a href="/articles/<%=@article.id%>/record">See all versions</a>
+	<p><a href="/articles/<%=@article.id%>/record">See all versions</a></p>
+	<a href="mailto:?Subject=<%=@article.name%>%20by%20Wikiwi&body=<%= @article.content %><%= @article.gif %>" target="_top"><p>E-mail this article</p></a>
 	<!-- if user is logged: -->
 	<% if session[:user_id] %> 
 		<!-- delete option only if same user logged created it-->
 		<% if @article.user == User.find(session[:user_id]) %>
 			<form action="/article/delete/<%=@article.id%>" method="POST">
-  				<input type="submit" value="Delete Article">
+  				<input type="submit" value="Delete this version">
 			</form>
 		<% end %>
 		<!-- if user is logged, give an option to edit article -->
 		<a href="/articles/update/<%=@article.id%>">Edit this Article</a>
 	<!-- If no user is signed in, display message -->
 	<% else %>
-		<p>Log in or sign up to contribute to this article.</p>
+		<p><a href="/login">Log in</a> or <a href="/register">Sign up</a> to contribute to this article.</p>
 	<% end %>
 </div>
 <!--/Delete or Edit Article -->

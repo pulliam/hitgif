@@ -7,6 +7,7 @@ class CreateUsers < ActiveRecord::Migration
 			t.string(:email)
 			t.string(:username)
 			t.string(:password_digest)
+			t.string :about_me, :default => "empty"
 		end
 	end
 	def down
@@ -37,6 +38,7 @@ class CreateArticles < ActiveRecord::Migration
 			t.integer(:user_id)
 			t.integer(:category_id)
 			t.datetime(:time_created)
+			t.string :gif, :default => "empty"
 		end
 	end
 	def down
@@ -55,6 +57,7 @@ class CreateRecords < ActiveRecord::Migration
 			t.integer(:category_id)
 			t.datetime(:time_created)
 			t.integer(:article_id)
+			t.string :gif, :default => "empty"
 		end
 	end
 	def down
@@ -63,19 +66,3 @@ class CreateRecords < ActiveRecord::Migration
 end
 
 CreateRecords.migrate(:up)
-
-class CreateVisits < ActiveRecord::Migration
-	def up
-		create_table :visits do |t|
-			t.integer(:visited_id)
-			t.integer(:visitor_id)
-			t.datetime(:created_at)
-		end
-	end
-
-	def down
-		drop_table :visits
-	end
-end
-
-CreateVisits.migrate(:up)

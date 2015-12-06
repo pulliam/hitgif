@@ -6,8 +6,16 @@
 
 <!-- Body of Page -->
 <div class="articles-body">
+  <% if @article_gif %> 
+    <img style="max-width:150px;"src="<%= @article_gif %>" style="max"><br><br>
+  <% end %> 
   <form action="/articles" method="POST">
-    <input type="text" name="title" placeholder="Title"><br> 
+    <% if @article_gif %> 
+    <input type="hidden" name="gif" value="<%= @article_gif %>">
+    <% else %>
+    <input type="text" name="gif" placeholder="Gif URL"><br> 
+    <% end %> 
+    <input type="text" name="title" placeholder="Give me a Title"><br><br>
     <input type="radio" name="category" value="1" checked>Education
     <input type="radio" name="category" value="2" checked>Sports
     <input type="radio" name="category" value="3" checked>Lifestyle
@@ -17,7 +25,7 @@
     <br>
     <br>
     <textarea id="article-content" name="content" rows="20" cols="50">Your Article in Markdown</textarea><br>
-    <button>Post</button>
+    <button>Create Article</button>
   </form>
 </div>
 <!--/Body of Page -->

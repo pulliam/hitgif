@@ -4,7 +4,7 @@
 </div>
 <!--/Title of Page-->
 
-<!-- Options Menu -->
+<!-- Options Menu --><!-- Try to put on dropdown -->
 <div class="order-by">
 	<form action="/articles/ordered/time_created" method="GET">
 		<!-- Sort by Recent -->
@@ -15,7 +15,7 @@
 		<button class="undobutton" type="submit">By Name</button>
 	</form>
 	<!-- Sort by Category (by Showing Categories/Index) -->
-	<a href="/categories"><button class="undobutton">By Category</button></a>
+	<a href="/categories"><button class="undobutton">See Categories</button></a>
 </div>
 <!--/Options Menu-->
 
@@ -23,7 +23,7 @@
 <div class="articles-body">
 	<ul>
 		<% @articles.each do |article| %>
-			<li><a href="/articles/<%= article.id %>"><%= article.name %></a></li>
+			<li><a href="/articles/<%= article.id %>"><img style="max-width:100px;" src="<%= article.gif %>"></a></li>
 		<% end %>
 	</ul>
 </div>

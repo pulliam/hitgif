@@ -52,17 +52,19 @@ module App
 	end
 
 	get "/article/create" do # Request form to create new article
+		@article_gif = params[:gif]
 		erb :'articles/create/article'
 	end
 
 	post "/articles" do # Creates new article
-		@new_article = Article.create({ name: params["title"], content: params["content"], time_created: DateTime.now, category_id: params["category"], user_id: session[:user_id] })
-		Record.create({ name: params["title"], content: params["content"], time_created: DateTime.now, category_id: params["category"], user_id: session[:user_id], article_id: @new_article.id })
+		@new_article = Article.create({ name: params["title"], content: params["content"], time_created: DateTime.now, category_id: params["category"], user_id: session[:user_id], gif: params["gif"] })
+		Record.create({ name: params["title"], content: params["content"], time_created: DateTime.now, category_id: params["category"], user_id: session[:user_id], gif: params["gif"], article_id: @new_article.id })
 		redirect to "/articles"
 	end
 
 	get "/articles/update/:id" do # Request form to update an article
 		@article = Article.find(params[:id].to_i)
+		@article_gif = @article.gif
 		erb :'articles/update/article'
 	end
 
@@ -75,7 +77,7 @@ module App
 
 	post "/article/delete/:id" do # Deletes an article only if creator of the same is the logged user
 		article = Article.find(params[:id])
-		article.destroy if article.user == $user
+		article.destroy
 		redirect to "/articles"
 	end
 
@@ -112,9 +114,19 @@ module App
 	end
 
 	get "/users/articles/:id" do # Request page of logged user, with articles created by the same
-		user = User.find(params[:id])
-		@user_articles = user.articles
+		@user = User.find(params[:id])
+		@user_articles = @user.articles
 		erb :'sessions/user_account'
+	end
+
+	get "/user/articles/bio/:id" do # Request page to add/edit Bio to your profile
+		erb :'sessions/user_bio'
+	end
+
+	post "/users/articles/bio/:id" do # Updates the user Bio profile
+		user = User.find(params[:id])
+		user.update({ about_me: params["about_me"]})
+		redirect to "/users/articles/#{params[:id]}"
 	end
 
 	get "/users" do # Request page of all registered users.
@@ -124,7 +136,6 @@ module App
 
 	get "/users/:id" do # Request page of all registered users.
 		redirect to "/" if !session[:user_id]
-      	Visit.create({ visited_id: params[:id], visitor_id: session[:user_id], created_at: DateTime.now})
       	@user = User.find(params[:id])
 		erb :'sessions/user'
 	end

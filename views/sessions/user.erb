@@ -1,9 +1,15 @@
-<div class="user">
-  <h1><%= @user.name %></h1>
- 
-  <p>Location: NY</p>
-  <p>Age: 22</p>
-  <p>Articles: <%= @user.articles %></p>
-  <p>Facebook: /facebpook.com</p>
-</div>
-<p><a href="/users">Back to Users</a></p>
+<h1><%= @user.name %></h1>
+<a href="mailto:<%= @user.email %>?Subject=Hello%20again" target="_top"><p>E-mail <%= @user.name %></p></a>
+
+<% if @user.about_me != "empty" %>
+<h2>Bio:</h2>
+<p><%= @user.about_me %></p>
+<% end %>
+
+<h2>Recent Articles by <%= @user.name %>:</h2>
+<ul>
+<% @user.articles.each do |article|%>
+<li><a href="/articles/<%= article.id %>"><%= article.name %></a>
+<% end %>
+</ul>
+
