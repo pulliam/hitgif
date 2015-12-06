@@ -1,6 +1,4 @@
 require 'sinatra'
-require 'better_errors'
-require 'pry'
 
 module App
   class Server < Sinatra::Base
