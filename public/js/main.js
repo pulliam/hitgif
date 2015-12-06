@@ -7,7 +7,9 @@ $button.on('click', function(){window.history.back();} );
 
 arrayOfTags = [
 "&tag=science", "&tag=music", "&tag=travel",
-"&tag=world", "&tag=politics", "&tag=animals" ];
+"&tag=world", "&tag=politics", "&tag=animals",
+"&tag=love", "&tag=beyonce", "&tag=newyork",
+"&tag=kardashian", "&tag=mtv", "&tag=meme" ];
 
 var randomIndex = Math.floor(Math.random() * arrayOfTags.length);
 
