@@ -1,15 +1,19 @@
+<div class="container wrapper">
+<div class="jumbotron jumbotronwhite">
+
 <!-- Title of Page -->
-	<div class="user-title">
-		<h2>Find Kiwi's</h2>
+	<div class="user-title-edit-bio text-center">
+		<h2>Hit Connect</h2>
 	</div>
 <!--/Title of Page -->
 
 <!-- Body of Page -->
-<ul class="user-list">
+<div class="all-users-page">
   <% @users.each do |user| %>
-    <li>
-      <p><a href="/users/<%= user.id %>"><%= user.name %></a></p>
-    </li>
+     <a href="/users/<%= user.id %>"><p class="no-decoration-link"><%= user.name %></p></a>
   <% end %>
-</ul>
+</div>
 <!--/Body of Page -->
+
+</div>
+</div>

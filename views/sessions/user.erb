@@ -1,15 +1,26 @@
-<h1><%= @user.name %></h1>
-<a href="mailto:<%= @user.email %>?Subject=Hello%20again" target="_top"><p>E-mail <%= @user.name %></p></a>
+<div class="container wrapper">
+<div class="jumbotron jumbotronwhite">
+
+<h1 class="cursive-font"><%= @user.name %></h1>
+<br>
+<a href="mailto:<%= @user.email %>?Subject=Hello%20There"><button class="btn btn-default">E-mail <%= @user.name %></button></a>
 
 <% if @user.about_me != "empty" %>
-<h2>Bio:</h2>
+<h2>About this hitgiffer:</h2>
 <p><%= @user.about_me %></p>
 <% end %>
 
-<h2>Recent Articles by <%= @user.name %>:</h2>
-<ul>
-<% @user.articles.each do |article|%>
-<li><a href="/articles/<%= article.id %>"><%= article.name %></a>
-<% end %>
-</ul>
+<% if @user.articles.any? %>
+<h2>Recent Articles by <%= @user.name %>:</h2><br>
 
+<% @user.articles.each do |article|%>
+<a href="/articles/<%= article.id %>"><span class="no-decoration-link"> <%= article.name %> | </span></a></li>
+<% end %>
+
+<% else %>
+<br><br>
+<p>This user hasn't published any articles recently.</p>
+<% end %>
+
+</div>
+</div>

@@ -1,15 +1,19 @@
-<!-- Title of Page -->
-<div class="categories-header">
-	<h2>Select a category</h2>
-</div>
-<!--/Title of Page-->
+<div class="container wrapper">
+<div class="jumbotron jumbotronwhite">
 
-<!-- Body of Page -->
-<div class="categories-body">
+	<h2>Articles Under Category: <%= @category.name %></h2>
+
+	<div class="categories-body">
+	<% if @articles.any? %>
 	<ul>
 		<% @articles.each do |article| %>
-			<li><a href="/articles/<%= article.id %>"><%= article.name %></a></li>
+			<li class="list-unstyled lead"><a href="/articles/<%= article.id %>"><p class="no-decoration-link"><%= article.name %></p></a></li>
 		<% end %>
 	</ul>
+	<% else %>
+		<p>Sorry this category is still empty!</p>
+	<% end %>
+	</div>
+
 </div>
-<!--/Body of Page-->
+</div>

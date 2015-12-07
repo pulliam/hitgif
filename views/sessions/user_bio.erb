@@ -1,10 +1,16 @@
+<div class="container wrapper">
+<div class="jumbotron jumbotronwhite">
+
 <!-- Title of Page -->
-	<div class="user-title">
+	<div class="user-title-edit-bio">
 		<h2><%=session[:user_name]%> Bio Description</h2>
 	</div>
 <!--/Title of Page -->
 
 <form action="/users/articles/bio/<%=session[:user_id]%>" method="POST">
-	<textarea name="about_me" rows="10" cols="30"></textarea><br>
+	<textarea name="about_me" rows="10" cols="80"><% if @user.about_me != "empty" %><%= @user.about_me %><% else %><% end %></textarea><br><br>
     <button>Update</button>
 </form>
+
+</div>
+</div>

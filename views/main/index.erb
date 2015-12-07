@@ -1,19 +1,22 @@
+<div class="container wrapper">
+<div class="jumbotron jumbotronwhite">
+
 <!--Login Successful-->
 <% if params[:message] %>
 	<%= @message %>
 <% end %>
 <!--/Login Successful-->
 
-<h1>Welcome</h1>
+<h1>Welcome to HitGif</h1>
 <br>
 <!-- href="/article/create?gif=https://media.giphy.com/media/Y376OHpjmYBiM/giphy.gif"
 src="https://media.giphy.com/media/Y376OHpjmYBiM/giphy.gif" -->
 
 <% if session[:user_id] %>
 	<p>Click to Create an Article on this GIF</p>
-	<button id="reload">Or Randomize Gif</button><br>
 	<a id="link-this">
-	<img id="gif-this" style="max-width:400px;"></a>
+	<img class="article-gif-each-border img-rounded" id="gif-this"></a><br><br>
+	<button id="reload">Or Randomize Gif</button>
 	<script>
 		function setup() {
 			noCanvas();
@@ -42,7 +45,8 @@ src="https://media.giphy.com/media/Y376OHpjmYBiM/giphy.gif" -->
 	</script>
 <% else %>
 	<h2><a href="/login">Login</a> or <a href="/register">Sign up</a> to get started...</h2>
-	<img id="gif-this" style="max-width:400px;">
+	<h2>This is just an example of what you can create an article on!</h2>
+	<img class="article-gif-each-border img-rounded" id="gif-this">
 		<script>
 		function setup() {
 			noCanvas();
@@ -54,10 +58,10 @@ src="https://media.giphy.com/media/Y376OHpjmYBiM/giphy.gif" -->
 		    })
 		};
 	</script>
-	<h2>This is just an example of what you can create an article on!</h2>
 <% end %>
 
-
+</div>
+</div>
 
 
 

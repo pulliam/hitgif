@@ -1,3 +1,6 @@
+<div class="container wrapper">
+<div class="jumbotron jumbotronwhite lessmarginontop">
+
 <!-- Title of Page -->
 <div class="articles-header">
   <h2>What's your version of this article?</h2>
@@ -7,11 +10,11 @@
 <!-- Body of Page -->
 <div class="articles-body">
     <% if @article_gif %> 
-        <img style="max-width:150px;"src="<%= @article_gif %>" style="max"><br><br>
+        <img class="article-gif-each-border img-rounded" style="max-width:150px;"src="<%= @article_gif %>" style="max"><br><br>
     <% end %> 
     <form action="/article/update/<%=@article.id%>" method="POST">
         <textarea name="name" rows="1" cols="70"><%=@article.name%></textarea>
-        <p>Select New Category:<p><br> 
+        <p>Select New Category:</p>
         <input type="radio" name="category" value="1" checked>Education
         <input type="radio" name="category" value="2" checked>Sports
         <input type="radio" name="category" value="3" checked>Lifestyle
@@ -21,9 +24,12 @@
         <br>
         <br>
         <label for="article-content">Edit/Redo</label><br>
-        <textarea id="article-content" name="content" rows="40" cols="70"><%=@article.content%></textarea><br>
+        <textarea id="article-content" name="content" rows="10" cols="90"><%=@article.content%></textarea><br>
         <input type="submit" value="Update Article">
     </form>
 </div>
 
 <!--/Body of Page -->
+
+</div>
+</div>

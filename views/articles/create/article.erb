@@ -1,14 +1,12 @@
-<!-- Title of Page -->
-<div class="articles-header">
-  <h2>Create your own article</h2>
-</div>
-<!--/Title of Page -->
+<div class="container wrapper">
+<div class="jumbotron jumbotronwhite lessmarginontop">
 
-<!-- Body of Page -->
-<div class="articles-body">
+  <h2>Create your own article</h2>
+
   <% if @article_gif %> 
-    <img style="max-width:150px;"src="<%= @article_gif %>" style="max"><br><br>
+    <img class="article-gif-each-border img-rounded" style="max-width:300px;"src="<%= @article_gif %>" style="max"><br><br>
   <% end %> 
+
   <form action="/articles" method="POST">
     <% if @article_gif %> 
     <input type="hidden" name="gif" value="<%= @article_gif %>">
@@ -24,8 +22,9 @@
     <input type="radio" name="category" value="6" checked>Travel
     <br>
     <br>
-    <textarea id="article-content" name="content" rows="20" cols="50">Your Article in Markdown</textarea><br>
+    <textarea id="article-content" name="content" rows="10" cols="90">Your Article in Markdown</textarea><br><br>
     <button>Create Article</button>
   </form>
+
 </div>
-<!--/Body of Page -->
+</div>

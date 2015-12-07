@@ -1,38 +1,44 @@
-<!--Title of Article-->
+<div class="container wrapper">
+<div class="jumbotron jumbotronwhite lessmarginontop">
+
 <div class="articles-header">
 	<% if @article.gif != "empty" %>
-	<img src="<%= @article.gif %>">
+	<img class="article-gif-each-border img-rounded" src="<%= @article.gif %>">
 	<% end %>
 	<h2><%= @article.name %></h2>
 </div>
-<!--/Title of Article-->
+
 
 <!--Content of Article In Markdown-->
-<div class="one-article-div">
+<div class="one-article-div pull-right">
 	<%= markdown(@article.content) %>
 	<br>
 	<p>Last Updated by: <%= @article.user.name %>, <%= @article.time_created.strftime("On %m/%d/%Y At %I:%M%p") %></p><br>
 </div>
 <!--/Content of Article In Markdown-->
 
-<!-- Delete or Edit Article -->
-<div class="articles-footer">
-	<!-- see previous versions -->
-	<p><a href="/articles/<%=@article.id%>/record">See all versions</a></p>
-	<a href="mailto:?Subject=<%=@article.name%>%20by%20Wikiwi&body=<%= @article.content %><%= @article.gif %>" target="_top"><p>E-mail this article</p></a>
-	<!-- if user is logged: -->
-	<% if session[:user_id] %> 
-		<!-- delete option only if same user logged created it-->
-		<% if @article.user == User.find(session[:user_id]) %>
-			<form action="/article/delete/<%=@article.id%>" method="POST">
-  				<input type="submit" value="Delete this version">
-			</form>
-		<% end %>
-		<!-- if user is logged, give an option to edit article -->
-		<a href="/articles/update/<%=@article.id%>">Edit this Article</a>
-	<!-- If no user is signed in, display message -->
-	<% else %>
-		<p><a href="/login">Log in</a> or <a href="/register">Sign up</a> to contribute to this article.</p>
+<!-- Edit/Delete/SeeRecords/Email Article -->
+<% if session[:user_id] %> 
+	<div class="btn-group btn-group-sm" role="group" aria-label="...">
+		<form style="float: left;" action="/articles/<%=@article.id%>/record" method="GET"><button class="btn btn-default" type="submit">Previous Versions</button></form>
+		<a style="float: left;" href="javascript:emailCurrentPage()"><button class="btn btn-default">E-mail</button></a>
+		
+	<% if @article.user == User.find(session[:user_id]) %>
+			<form style="float: left;" action="/article/delete/<%=@article.id%>" method="POST"><button class="btn btn-default" type="submit">Delete Version</button></form>
 	<% end %>
+			<a style="float: left;" href="/articles/update/<%=@article.id%>"><button class="btn btn-default">Edit this Article</button></a>
+	</div>
+
+<% else %>
+		<div class="btn-group btn-group-sm" role="group" aria-label="...">
+			<form style="float: left;" action="/articles/<%=@article.id%>/record" method="GET"><button class="btn btn-default" type="submit">Previous Versions</button></form>
+			<a style="float: left;" href="javascript:emailCurrentPage()"><button class="btn btn-default">E-mail</button></a>
+		</div>
+		<div class="message-for-login-if-edit">
+			<p><a href="/login">Log in</a> or <a href="/register">Sign up</a> to contribute to this article.</p>
+		</div>
+<% end %>
+<!--/Edit/Delete/SeeRecords/Email Article -->
+
 </div>
-<!--/Delete or Edit Article -->
+</div>

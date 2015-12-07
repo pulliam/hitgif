@@ -1,20 +1,20 @@
-<!-- Title of Page -->
+<div class="container wrapper">
+<div class="jumbotron jumbotronwhite lessmarginontop">
+
+
 <div class="articles-header">
-	<h2>Historic of:</h2><img style="max-width:300px;" src="<%= @article.gif %>">
+	<h2>Historic of:</h2>
+	<br><img class="article-gif-each-border img-rounded" style="max-width:300px;" src="<%= @article.gif %>"><br><br>
 	<p>Last Name Given: <%= @article.name %></p>
 </div>
-<!--/Title of Page -->
 
-<!-- Body of Page -->
+<p class="text-left">Previous Versions:</p>
 <div class="articles-body">
-	<ul>
 		<% @records.each do |record| %>
-			<li><a href="/articles/<%= @article.id %>/records/<%= record.id %>"><%= record.name %></a></li>
+			<a href="/articles/<%= @article.id %>/records/<%= record.id %>"><p class="text-left no-decoration-link"><%= record.name %>, <%= record.time_created.strftime("edited on %m/%d (%I:%M%p)") %></p></a>
 		<% end %>
-	</ul>
 </div>
-<!--/Body of Page -->
 
-<!-- Always Display: -->
-<button id="back" onclick="goBack()">Previous Page</button>
-<!-- /Always Display -->
+
+</div>
+</div>

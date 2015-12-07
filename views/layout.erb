@@ -10,6 +10,7 @@
 	<!-- CSS -->
 	<link rel="stylesheet" href="/css/style.css">
 	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link href='https://fonts.googleapis.com/css?family=Sacramento' rel='stylesheet' type='text/css'>
 	<!--/CSS -->
 
 	<!-- NAVBAR -->
@@ -31,16 +32,20 @@
 					<li class="dropdown">
               		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu<b class="caret"></b></a>
               			<ul class="dropdown-menu">
+              				<li class="dropdown-header">Navegate</li>
               				<li><a href="/articles">All Articles</a></li>
                 			<li><a href="/categories">Categories</a></li>
               				<!-- OPTIONS -->
 							<% if session[:user_id] %> <!-- If logged -->
 							<li><a href="/article/create">Create Own Article</a></li>
+							<li class="dropdown-header">Account</li>
+							<li><a href="/users">Search Friends</a></li>
 							<li><a href="/users/articles/<%= session[:user_id] %>">My Account</a></li>
 							<li><form action="/sessions/delete" method="POST">
 								<button class="remove_button_css" type="submit">Log Out</button>
 							</form></li>
 							<% else %> <!-- If not logged -->
+							<li class="dropdown-header">Join</li>
 							<li><a href="/login">Login</a></li>
 							<li><a href="/register">Sign Up</a></li>
 							<% end %>
@@ -55,22 +60,27 @@
 </head>
 <!--/HEAD -->
 
-<!-- Body -->
+<!-- BODY -->
 <body>
-	<!--class body -->	
-	<div class="body">
+
+	<!--CONTENT -->	
+
 		<%= yield %>
+
+	<!--/CONTENT -->	
+
+	<!-- FOOTER -->
+	<div class="navbar navbar-default navbar-fixed-bottom"  id="footer-body">
+		<div class="container">
+		<a href="http://www.thaispulliam.com"><p class="navbar-text pull-left"><span class="glyphicon glyphicon-copyright-mark"></span> Site Built by Thais Pulliam</p></a>
+		<% if session[:user_id] %> <!-- If logged -->
+		<% user = User.find(session[:user_id])%>
+		<p class="navbar-text">Logged as <%= user.name %></p>
+		<% end %><!--/If logged -->
+		<a class="navbar-button btn pull-right" href="http://giphy.com/"><img class="giphy-logo" src="http://iamemmanouil.com/react-giphy/images/giphy.png"></a>
+		</div>
 	</div>
-	<!--/class body -->	
-
-	<!-- Footer -->
-	<% if session[:user_id] %> <!-- If logged -->
-	<% user = User.find(session[:user_id])%>
-	<p>Logged as <%= user.name %></p>
-	<% end %><!--/If logged -->
-
-	<img src="http://s17.postimg.org/p6d5m8a5b/Powered_By_200_Horizontal_Light_Backgrounds_With.gif">
-	<!-- /Footer -->
+	<!-- /FOOTER -->
 
 	<!-- SCRIPTS -->
 	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -81,7 +91,8 @@
 	<script language="javascript" src="/js/p5.js"></script>
 	<script language="javascript" src="/js/p5.dom.js"></script>
 	<!--/SCRIPTS -->
+
 </body>
-<!--/Body -->
+<!--/BODY -->
 
 </html>

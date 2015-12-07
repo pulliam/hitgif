@@ -83,8 +83,8 @@ module App
 	end
 
 	get "/categories/articles/:id" do # Request a specific article inside a category
-		category = Category.find(params[:id])
-		@articles = category.articles
+		@category = Category.find(params[:id])
+		@articles = @category.articles
 		erb :'categories/show'
 	end
 
@@ -116,6 +116,7 @@ module App
 	end
 
 	get "/user/articles/bio/:id" do # Request page to add/edit Bio to your profile
+		@user = User.find(params[:id])
 		erb :'sessions/user_bio'
 	end
 
@@ -134,12 +135,6 @@ module App
 		redirect to "/" if !session[:user_id]
       	@user = User.find(params[:id])
 		erb :'sessions/user'
-	end
-
-	get "/users/visits" do # Request page of all registered users.
-		@visits = User.find(session[:user_id]).visits
-		@users = User.all
-		erb :'sessions/visits'
 	end
 
 	get "/register" do # Request form to register new user

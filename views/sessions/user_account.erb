@@ -1,28 +1,38 @@
+<div class="container wrapper">
+<div class="jumbotron jumbotronwhite">
+
 <!-- Title of Page -->
 	<div class="user-title">
-		<h2><%=session[:user_name]%> Kiwi's</h2>
-		<a href="/users"><button>Search Friends</button></a>
-		<% if @user.about_me == "empty" %>
-		<a href="/user/articles/bio/<%=session[:user_id]%>"><button>Add a bio to your profile</button></a>
-		<% else %>
-		<a href="/user/articles/bio/<%=session[:user_id]%>"><button>Update your Bio</button></a>
-		<% end %>
+		<h2 class="cursive-font"><%=session[:user_name]%>'s hitgif</h2>
+
+		<div class="btn-group btn-group-sm" role="group" aria-label="...">
+			<form style="float: left; margin-right: 10px;" action="/users" method="GET"><button class="btn btn-default" type="submit">Search Friends</button></form>
+
+			<% if @user.about_me == "empty" %>
+			<form style="float: left;" action="/user/articles/bio/<%=session[:user_id]%>" method="GET"><button class="btn btn-default" type="submit">Add a Bio</button></form>
+			
+			<% else %>
+			<form style="float: left;" action="/user/articles/bio/<%=session[:user_id]%>" method="GET"><button class="btn btn-default" type="submit">Edit Profile</button></form>
+			<% end %>
+
+		</div>
 	</div>
 <!--/Title of Page -->
 
 <!-- Body of Page -->
 	<div class="user-body">
+		<div class="about-me-on-profile">
 		<% if @user.about_me != "empty" %>
-		<h3>My Bio:</h3>
-		<%= @user.about_me %>
+		<p class="lead text-justify"><%= @user.about_me %></p>
+		</div>
 		<% end %>
-		<%if @user_articles.any? %>
 		<!-- If User has Articles -->
-			<h3>Articles by me:</h3>
+		<%if @user_articles.any? %>
+			<h3 class="text-left">Articles by me:</h3><br>
 			<ul> 
 				<!-- Articles of User -->
 				<% @user_articles.each do |article| %>
-					<li><a href="/articles/<%= article.id %>"><%= article.name %></a>, on <%= article.time_created.strftime("%m/%d/%Y") %></li>
+					<li class="list-unstyled"><p class="text-left"><a href="/articles/<%= article.id %>"><small><%= article.name %></a>, on <%= article.time_created.strftime("%m/%d/%Y") %></small></p></li>
 				<% end %>
 				<!--/Articles of User -->
 			</ul>
@@ -32,3 +42,6 @@
 		<% end %>
 	</div>
 <!--/Body of Page -->
+
+</div>
+</div>
