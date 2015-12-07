@@ -15,7 +15,7 @@ class CreateUsers < ActiveRecord::Migration
 	end
 end
 
-CreateUsers.migrate(ARGV[0])
+
 
 class CreateCategories < ActiveRecord::Migration
 	def up
@@ -28,7 +28,6 @@ class CreateCategories < ActiveRecord::Migration
 	end
 end
 
-CreateCategories.migrate(ARGV[0])
 
 class CreateArticles < ActiveRecord::Migration
 	def up
@@ -46,7 +45,7 @@ class CreateArticles < ActiveRecord::Migration
 	end
 end
 
-CreateArticles.migrate(ARGV[0])
+
 
 class CreateRecords < ActiveRecord::Migration
 	def up
@@ -65,4 +64,3 @@ class CreateRecords < ActiveRecord::Migration
 	end
 end
 
-CreateRecords.migrate(ARGV[0])
