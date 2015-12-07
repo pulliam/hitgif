@@ -25,3 +25,5 @@ end
 Dir.glob('models/*.rb').each do |path|
   require_relative "../#{path}"
 end
+
+ActiveRecord::Base.default_timezone = :local
