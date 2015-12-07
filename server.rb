@@ -14,6 +14,10 @@ module App
 		erb :'main/index'
 	end
 
+	get "/aboutus" do # Request main page
+		erb :'main/about_us'
+	end
+
 	get "/articles" do # Request list of all articles
 		@articles = Article.all
 		erb :'articles/index'

@@ -16,17 +16,23 @@
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<a href="/" class="navbar-brand">HitGif</a>
+
 			<button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
         	</button>
+
 			<div class="collapse navbar-collapse navHeaderCollapse">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="/articles">All Articles</a></li>
-                	<li><a href="/categories">Categories</a></li>
+					<li><a href="/">Home</a></li>
                 	<li><a class="previous_page">Back</a></li>
+                	<li><a href="/aboutus">About Us</a></li>
 					<li class="dropdown">
               		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu<b class="caret"></b></a>
               			<ul class="dropdown-menu">
-              				<li><a href="/">Home</a></li>
+              				<li><a href="/articles">All Articles</a></li>
+                			<li><a href="/categories">Categories</a></li>
               				<!-- OPTIONS -->
 							<% if session[:user_id] %> <!-- If logged -->
 							<li><a href="/article/create">Create Own Article</a></li>
