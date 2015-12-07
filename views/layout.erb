@@ -1,14 +1,75 @@
 <!DOCTYPE html>
 <html>
+<!--HEAD -->
 <head>
 	<title>HitGif Wiki</title>
-	<!-- Meta Configurations -->
+	<!-- META Configurations -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!--/Meta Configurations -->
+	<!--/META Configurations -->
 
-	<!-- Links to Public -->
+	<!-- CSS -->
 	<link rel="stylesheet" href="/css/style.css">
 	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<!--/CSS -->
+
+	<!-- NAVBAR -->
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<a href="/" class="navbar-brand">HitGif</a>
+			<button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+        	</button>
+			<div class="collapse navbar-collapse navHeaderCollapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="/articles">All Articles</a></li>
+                	<li><a href="/categories">Categories</a></li>
+					<li class="dropdown">
+              		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu<b class="caret"></b></a>
+              			<ul class="dropdown-menu">
+              				<li><a href="/">Home</a></li>
+              				<!-- OPTIONS -->
+							<% if session[:user_id] %> <!-- If logged -->
+							<li><a href="/article/create">Create Own Article</a></li>
+							<li><a href="/users/articles/<%= session[:user_id] %>">My Account</a></li>
+							<li><form action="/sessions/delete" method="POST">
+								<button class="remove_button_css" type="submit">Log Out</button>
+							</form></li>
+							<% else %> <!-- If not logged -->
+							<li><a href="/login">Login</a></li>
+							<li><a href="/register">Sign Up</a></li>
+							<% end %>
+							<!--/OPTIONS -->
+              			</ul><!--/UL dropdown-->
+            		</li><!--/LI dropdown-->
+				</ul><!--/nav navbar-nav navbar-right-->
+			</div><!--/navbar-collapse navHeaderCollapse"-->
+		</div><!--/container-->
+	</div><!--navbar-inverse navbar-fixed-top-->
+<!--/NAVBAR -->
+</head>
+<!--/HEAD -->
+
+<!-- Body -->
+<body>
+	<!--class body -->	
+	<div class="body">
+		<%= yield %>
+	</div>
+	<!--/class body -->	
+
+	<!-- Footer -->
+	<% if session[:user_id] %> <!-- If logged -->
+	<% user = User.find(session[:user_id])%>
+	<p>Logged as <%= user.name %></p>
+	<% end %><!--/If logged -->
+
+	<div class="main_footer">
+		<button class="previous_page">Previous Page</button>
+	</div>
+
+	<img src="http://s17.postimg.org/p6d5m8a5b/Powered_By_200_Horizontal_Light_Backgrounds_With.gif">
+	<!-- /Footer -->
+
+	<!-- SCRIPTS -->
 	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script language="javascript" src="/js/main.js"></script>
@@ -16,46 +77,8 @@
 	<script language="javascript" src="/js/p5.min.js"></script>
 	<script language="javascript" src="/js/p5.js"></script>
 	<script language="javascript" src="/js/p5.dom.js"></script>
-	<!--/Links to Public -->
-</head>
-
-<body>
-
-	<!-- navbar -->
-	<div class="navbar">
-		<a href="/"><button>Home</button></a>
-		<a href="/articles"><button>All Articles</button></a>
-		<a href="/categories"><button>Categories</button></a>
-		<!-- OPTIONS -->
-		<% if session[:user_id] %> <!-- If logged -->
-			<a href="/article/create"><button>Create Own Article</button></a>
-			<a href="/users/articles/<%= session[:user_id] %>"><button>My Account</button></a>
-		<% else %> <!-- If not logged -->
-			<a href="/login"><button>Login</button></a>
-			<a href="/register"><button>Sign Up</button></a>
-		<% end %>
-		<!--/OPTIONS -->
-	</div>
-	<!--/navbar -->
-
-	<!-- Body -->
-	<div class="body">
-		<%= yield %>
-	</div>
-	<!-- /Body -->	
-
-	<!-- Footer -->
-	<% if session[:user_id] %> <!-- If logged -->
-			<% user = User.find(session[:user_id])%>
-			<p>Logged as <%= user.name %></p>
-			<form action="/sessions/delete" method="POST"><button>Log Out</button></form> 
-	<% end %>
-	<div class="main_footer">
-		<button class="previous_page">Previous Page</button>
-	</div>
-	<!-- /Footer -->
-
-	<img src="http://s17.postimg.org/p6d5m8a5b/Powered_By_200_Horizontal_Light_Backgrounds_With.gif">
-
+	<!--/SCRIPTS -->
 </body>
+<!--/Body -->
+
 </html>
