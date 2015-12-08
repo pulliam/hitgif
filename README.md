@@ -19,6 +19,9 @@ Wekiwi, the original name of the project, was replaced by HitGif!
 During the development of the app, I felt like something was missing and decided to add a little spice into it. With a little study on API's, I created a random gif generation on my app my linking it to giphy api, and directed my app to be focused on articles of gifs. User should be able to see a random gif on logged in page, and either select it or press the randomize button to get a different random gif. When clicking on it, the user should be able to see a create article form with the chosen gif, by inputing text, title and category of his choice. The other features remain similar, users can edit articles on a gif, they can delete an article IF the same was created by them. BUT! If an article is edited, it automatically send old versions to a record database, and all versions are stores in the app, and user loses the possibility to change or delete those records. This gives a fun feature where debates can be generated and articles are more controlled stored. 
 Articles can be emailed and users can email other users. New columns were added to users table: bio, and gif was added to articles and records table.
 
+## Technologies Used
+HTML, CSS, Ruby, Sinatra, Json, jQuery, SQL, JavaScript, Bootstrap, Giphy API
+
 ## ERD
 <img width="1201" alt="screen shot 2015-12-02 at 1 55 20 pm" src="https://cloud.githubusercontent.com/assets/14362520/11545213/f64fc2c2-9913-11e5-99f3-076e220956a6.png">
 <img width="823" alt="screen shot 2015-12-02 at 3 02 56 pm" src="https://cloud.githubusercontent.com/assets/14362520/11545229/1ceb0784-9914-11e5-9ec5-41907fccff34.png">
