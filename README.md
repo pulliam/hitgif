@@ -20,7 +20,7 @@ During the development of the app, I felt like something was missing and decided
 Articles can be emailed and users can email other users. New columns were added to users table: bio, and gif was added to articles and records table.
 
 ## Technologies Used
-HTML, CSS, Ruby, Sinatra, Json, jQuery, SQL, JavaScript, Bootstrap, Giphy API, Active Record, Gems including BCrypt & Red Carpet
+HTML, CSS, Ruby, Sinatra, Json, jQuery, SQL, JavaScript, Bootstrap, P5, Giphy API, Active Record, Gems including BCrypt, Better Errors & Red Carpet
 
 ## ERD
 <img width="1201" alt="screen shot 2015-12-02 at 1 55 20 pm" src="https://cloud.githubusercontent.com/assets/14362520/11545213/f64fc2c2-9913-11e5-99f3-076e220956a6.png">
